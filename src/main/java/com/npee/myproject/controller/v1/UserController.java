@@ -1,5 +1,10 @@
 package com.npee.myproject.controller.v1;
 
+import com.npee.myproject.advice.exception.CustomUserNotExistsException;
+import com.npee.myproject.config.response.CommonResult;
+import com.npee.myproject.config.response.ListResult;
+import com.npee.myproject.config.response.ResponseService;
+import com.npee.myproject.service.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/users")
 public class UserController {
 
+    private final ResponseService responseService;
+    private final UserServiceImpl userService;
+
     @ApiOperation(value = "회원 목록", notes = "회원 목록 불러오기")
     @GetMapping
-    public String getUsers() {
-        return "조회된 유저 목록";
+    public CommonResult getUsers() {
+        return responseService.getListResult(userService.selectAllUsers());
     }
 }
