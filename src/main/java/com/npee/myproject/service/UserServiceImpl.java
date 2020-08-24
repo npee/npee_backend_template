@@ -1,5 +1,6 @@
 package com.npee.myproject.service;
 
+import com.npee.myproject.advice.exception.CustomSigninFailedException;
 import com.npee.myproject.advice.exception.CustomUserNotExistsException;
 import com.npee.myproject.entity.User;
 import com.npee.myproject.repository.UserJpaRepository;
@@ -30,7 +31,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectUserByIdAndPassword(String id, String pw) {
-        return userJpaRepository.findByUserIdAndPassword(id, pw).orElseThrow(CustomUserNotExistsException::new);
+        userJpaRepository.findByUserId(id).orElseThrow(CustomUserNotExistsException::new);
+        return userJpaRepository.findByUserIdAndPassword(id, pw).orElseThrow(CustomSigninFailedException::new);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User deleteUserByUserNo(Long userNo) {
-        User deletedUser = userJpaRepository.findById(userNo).orElseThrow(CustomUserNotExistsException::new);
+        User deletedUser = userJpaRepository.findByUserNo(userNo).orElseThrow(CustomUserNotExistsException::new);
         userJpaRepository.deleteById(userNo);
         return deletedUser;
     }

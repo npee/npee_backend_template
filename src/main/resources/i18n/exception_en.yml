@@ -7,7 +7,7 @@ userNotExists:
   message: "The user does NOT exist."
 signinFailed:
   code: "-1001"
-  message: "This account does not exist or your ID orPASSWORD is NOT correct."
+  message: "Your ID or PASSWORD is NOT correct."
 entryPointException:
   code: "-1002"
   message: "You do NOT have permission to access this resource."

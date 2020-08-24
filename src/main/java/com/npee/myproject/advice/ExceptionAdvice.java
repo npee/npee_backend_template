@@ -1,5 +1,6 @@
 package com.npee.myproject.advice;
 
+import com.npee.myproject.advice.exception.CustomSigninFailedException;
 import com.npee.myproject.advice.exception.CustomUserNotExistsException;
 import com.npee.myproject.config.response.CommonResult;
 import com.npee.myproject.config.response.ResponseService;
@@ -32,6 +33,12 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult userNotExistsException(HttpServletRequest request, CustomUserNotExistsException e) {
         return responseService.getFailResult(Integer.parseInt(getMessage("userNotExists.code")), getMessage("userNotExists.message"));
+    }
+
+    @ExceptionHandler(CustomSigninFailedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult signinFailedException(HttpServletRequest request, CustomSigninFailedException e) {
+        return responseService.getFailResult(Integer.parseInt(getMessage("signinFailed.code")), getMessage("signinFailed.message"));
     }
 
     private String getMessage(String code) {

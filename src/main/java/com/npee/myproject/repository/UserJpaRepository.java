@@ -11,5 +11,7 @@ import java.util.Optional;
  * 제네릭으로 객체 타입(Entity)과 Long을 사용한다.
  * */
 public interface UserJpaRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUserNo(Long userNo);
+    Optional<User> findByUserId(String id);
     Optional<User> findByUserIdAndPassword(String id, String pw);
 }
