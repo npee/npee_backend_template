@@ -1,5 +1,6 @@
 package com.npee.myproject.entity;
 
+import com.npee.myproject.entity.common.BaseTime;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +16,7 @@ import javax.persistence.*;
 // Editor -> Inspection -> Unresolved database references in annotations 체크 해제
 @Table(name = "users")
 @Slf4j
-public class User {
+public class User extends BaseTime {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userNo;
 
