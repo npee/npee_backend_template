@@ -27,4 +27,21 @@ public class UserServiceImpl implements UserService {
         // if (userList.isEmpty()) throw new CustomUserNotExistsException();
         // else return userList;
     }
+
+    @Override
+    public User selectUserByIdAndPassword(String id, String pw) {
+        return userJpaRepository.findByUserIdAndPassword(id, pw).orElseThrow(CustomUserNotExistsException::new);
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return userJpaRepository.save(user);
+    }
+
+    @Override
+    public User deleteUserByUserNo(Long userNo) {
+        User deletedUser = userJpaRepository.findById(userNo).orElseThrow(CustomUserNotExistsException::new);
+        userJpaRepository.deleteById(userNo);
+        return deletedUser;
+    }
 }
