@@ -35,20 +35,20 @@ public class UserController {
 
     @ApiOperation(value = "회원 검색", notes = "특정 회원 검색")
     @GetMapping("/users")
-    public SingleResult<User> getUser(@RequestParam String id,
+    public SingleResult<ResponseUserDto> getUser(@RequestParam String id,
                                       @RequestParam String pw) {
         return responseService.getSingleResult(userService.selectUserByIdAndPassword(id, pw));
     }
-
-    @ApiOperation(value = "회원 추가/수정", notes = "회원 업데이트")
-    @PostMapping("/users")
-    public SingleResult<User> setUser(@RequestBody User user) {
-        return responseService.getSingleResult(userService.updateUser(user));
-    }
+// TODO: @RequestBody로 RequestUserDto를 받을 수 있도록 DTO 생성하기
+//    @ApiOperation(value = "회원 추가/수정", notes = "회원 업데이트")
+//    @PostMapping("/users")
+//    public SingleResult<ResponseUserDto> setUser(@RequestBody User user) {
+//        return responseService.getSingleResult(userService.updateUser(user));
+//    }
 
     @ApiOperation(value = "회원 삭제", notes = "회원 삭제")
     @DeleteMapping("/users/{userNo}")
-    public SingleResult<User> deleteUser(@PathVariable Long userNo) {
+    public SingleResult<ResponseUserDto> deleteUser(@PathVariable Long userNo) {
         return responseService.getSingleResult(userService.deleteUserByUserNo(userNo));
     }
 

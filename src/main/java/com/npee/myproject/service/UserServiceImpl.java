@@ -31,19 +31,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectUserByIdAndPassword(String id, String pw) {
+    public ResponseUserDto selectUserByIdAndPassword(String id, String pw) {
         userJpaRepository.findByUserId(id).orElseThrow(CustomUserNotExistsException::new);
         return userJpaRepository.findByUserIdAndPassword(id, pw).orElseThrow(CustomSigninFailedException::new);
     }
 
     @Override
-    public User updateUser(User user) {
-        return userJpaRepository.save(user);
+    public ResponseUserDto updateUser(User user) {
+        return userJpaRepository.save(user).toResponseDto();
     }
 
     @Override
-    public User deleteUserByUserNo(Long userNo) {
-        User deletedUser = userJpaRepository.findByUserNo(userNo).orElseThrow(CustomUserNotExistsException::new);
+    public ResponseUserDto deleteUserByUserNo(Long userNo) {
+        ResponseUserDto deletedUser = userJpaRepository.findByUserNo(userNo).orElseThrow(CustomUserNotExistsException::new);
         userJpaRepository.deleteById(userNo);
         return deletedUser;
     }

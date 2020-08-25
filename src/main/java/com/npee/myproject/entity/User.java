@@ -1,6 +1,7 @@
 package com.npee.myproject.entity;
 
 import com.npee.myproject.entity.common.BaseTime;
+import com.npee.myproject.entity.dto.ResponseUserDto;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,4 +29,8 @@ public class User extends BaseTime {
 
     @Column(nullable = true)
     private String userName;
+
+    public ResponseUserDto toResponseDto() {
+        return new ResponseUserDto(this.userNo, this.userId, this.userName);
+    }
 }
