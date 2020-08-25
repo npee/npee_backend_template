@@ -1,8 +1,11 @@
 package com.npee.myproject.repository;
 
 import com.npee.myproject.entity.User;
+import com.npee.myproject.entity.dto.ResponseUserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -14,4 +17,7 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserNo(Long userNo);
     Optional<User> findByUserId(String id);
     Optional<User> findByUserIdAndPassword(String id, String pw);
+
+    @Query("SELECT new com.npee.myproject.entity.dto.ResponseUserDto(u.userNo, u.userId, u.password) FROM User u")
+    List<ResponseUserDto> customUserSelect();
 }

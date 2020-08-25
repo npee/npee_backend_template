@@ -3,6 +3,7 @@ package com.npee.myproject.service;
 import com.npee.myproject.advice.exception.CustomSigninFailedException;
 import com.npee.myproject.advice.exception.CustomUserNotExistsException;
 import com.npee.myproject.entity.User;
+import com.npee.myproject.entity.dto.ResponseUserDto;
 import com.npee.myproject.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +19,10 @@ public class UserServiceImpl implements UserService {
     private final UserJpaRepository userJpaRepository;
 
     @Override
-    public List<User> selectAllUsers() {
+    public List<ResponseUserDto> selectAllUsers() {
         // TODO: 데이터베이스에서 USER 정보 불러오기
         // findAll() 메서드는 메서드 체인으로 예외처리할 수 없다.
-        return userJpaRepository.findAll();
+        return userJpaRepository.customUserSelect();
 
         // db 없을 때 에러메시지 확인
         // List<String> userList = new ArrayList<>();
