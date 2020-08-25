@@ -6,6 +6,7 @@ import com.npee.myproject.config.response.ListResult;
 import com.npee.myproject.config.response.ResponseService;
 import com.npee.myproject.config.response.SingleResult;
 import com.npee.myproject.entity.User;
+import com.npee.myproject.entity.dto.RequestUserDto;
 import com.npee.myproject.entity.dto.ResponseUserDto;
 import com.npee.myproject.service.UserServiceImpl;
 import io.swagger.annotations.Api;
@@ -39,12 +40,12 @@ public class UserController {
                                       @RequestParam String pw) {
         return responseService.getSingleResult(userService.selectUserByIdAndPassword(id, pw));
     }
-// TODO: @RequestBody로 RequestUserDto를 받을 수 있도록 DTO 생성하기
-//    @ApiOperation(value = "회원 추가/수정", notes = "회원 업데이트")
-//    @PostMapping("/users")
-//    public SingleResult<ResponseUserDto> setUser(@RequestBody User user) {
-//        return responseService.getSingleResult(userService.updateUser(user));
-//    }
+
+    @ApiOperation(value = "회원 추가/수정", notes = "회원 업데이트")
+    @PostMapping("/users")
+    public SingleResult<ResponseUserDto> setUser(@RequestBody RequestUserDto userDto) {
+        return responseService.getSingleResult(userService.updateUser(userDto));
+    }
 
     @ApiOperation(value = "회원 삭제", notes = "회원 삭제")
     @DeleteMapping("/users/{userNo}")

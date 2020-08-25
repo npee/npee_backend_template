@@ -3,6 +3,7 @@ package com.npee.myproject.service;
 import com.npee.myproject.advice.exception.CustomSigninFailedException;
 import com.npee.myproject.advice.exception.CustomUserNotExistsException;
 import com.npee.myproject.entity.User;
+import com.npee.myproject.entity.dto.RequestUserDto;
 import com.npee.myproject.entity.dto.ResponseUserDto;
 import com.npee.myproject.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +38,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseUserDto updateUser(User user) {
-        return userJpaRepository.save(user).toResponseDto();
+    public ResponseUserDto updateUser(RequestUserDto userDto) {
+        return userJpaRepository.save(userDto.toEntity()).toResponseDto();
     }
 
     @Override

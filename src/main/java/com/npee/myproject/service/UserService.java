@@ -1,6 +1,7 @@
 package com.npee.myproject.service;
 
 import com.npee.myproject.entity.User;
+import com.npee.myproject.entity.dto.RequestUserDto;
 import com.npee.myproject.entity.dto.ResponseUserDto;
 
 import java.util.List;
@@ -11,6 +12,6 @@ public interface UserService {
     // List<String> selectAllUsers();
     List<ResponseUserDto> selectAllUsers();
     ResponseUserDto selectUserByIdAndPassword(String id, String pw);
-    ResponseUserDto updateUser(User user);
+    ResponseUserDto updateUser(RequestUserDto requestUserDto);
     ResponseUserDto deleteUserByUserNo(Long userNo);
 }
