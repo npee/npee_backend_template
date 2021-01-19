@@ -1,7 +1,7 @@
-package com.npee.myproject.entity;
+package com.npee.myproject.domain.entity;
 
-import com.npee.myproject.entity.common.BaseTime;
-import com.npee.myproject.entity.dto.ResponseUserDto;
+import com.npee.myproject.domain.entity.common.BaseTime;
+import com.npee.myproject.domain.entity.dto.ResponseUserDto;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 

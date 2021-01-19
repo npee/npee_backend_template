@@ -1,4 +1,4 @@
-package com.npee.myproject.entity.dto;
+package com.npee.myproject.domain.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

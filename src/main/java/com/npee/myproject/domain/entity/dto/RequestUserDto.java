@@ -1,6 +1,6 @@
-package com.npee.myproject.entity.dto;
+package com.npee.myproject.domain.entity.dto;
 
-import com.npee.myproject.entity.User;
+import com.npee.myproject.domain.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
