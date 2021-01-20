@@ -27,26 +27,26 @@ public class UserController {
     // TODO: Entity가 준비되면 CommonResult에서 상황에 맞게 SingleResult나 ListResult로 변경
     // TODO: Entity에 직접 접근하지 않기 위해 DTO 이용
     public ListResult<ResponseUserDto> getUsers() {
-        return responseService.getListResult(userService.selectAllUsers());
+        return null;
     }
 
     @ApiOperation(value = "회원 검색", notes = "특정 회원 검색")
     @GetMapping("/v1/users")
     public SingleResult<ResponseUserDto> getUser(@RequestParam String id,
                                       @RequestParam String pw) {
-        return responseService.getSingleResult(userService.selectUserByIdAndPassword(id, pw));
+        return null;
     }
 
     @ApiOperation(value = "회원 추가/수정", notes = "회원 업데이트")
     @PostMapping("/v1/users")
     public SingleResult<ResponseUserDto> setUser(@RequestBody RequestUserDto userDto) {
-        return responseService.getSingleResult(userService.updateUser(userDto));
+        return null;
     }
 
     @ApiOperation(value = "회원 삭제", notes = "회원 삭제")
     @DeleteMapping("/v1/users/{userNo}")
     public SingleResult<ResponseUserDto> deleteUser(@PathVariable Long userNo) {
-        return responseService.getSingleResult(userService.deleteUserByUserNo(userNo));
+        return null;
     }
 
 }
