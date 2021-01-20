@@ -144,3 +144,6 @@ gradle-app.setting
 # !i18n/*
 #!exception_ko.yml
 #!exception_en.yml
+
+### QueryDSL Generated QClass
+/src/main/generated
