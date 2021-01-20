@@ -1,13 +1,17 @@
 buildscript {
     ext {
         springBootVersion = '2.2.6.RELEASE'
+        dependencyManagementVersion = '1.0.10.RELEASE'
     }
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.9.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:${dependencyManagementVersion}"
     }
 }
 
@@ -28,6 +32,7 @@ dependencies {
 
     /* TEST */
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'junit:junit:4.12'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // testImplementation 'org.springframework.security:spring-security-test'
 
@@ -39,7 +44,7 @@ dependencies {
     // compile group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.1.0.RELEASE'
 
     /* Devtools */
-    // implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-devtools'
 
     /* OAuth2 2.4.0, AutoConfigure */
     // implementation 'org.springframework.security.oauth:spring-security-oauth2:2.4.0.RELEASE'
@@ -52,7 +57,7 @@ dependencies {
     /* View */
     // compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     // compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
-    // implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 
     /* Lombok */
@@ -60,9 +65,15 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     /* Database */
-    // runtimeOnly 'com.h2database:h2'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
     runtimeOnly'mysql:mysql-connector-java'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // After configuring DB connection
+
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-core'
+    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 
     /* Swagger */
     implementation 'io.springfox:springfox-swagger2:2.6.1'
@@ -76,7 +87,24 @@ dependencies {
     /* JWT */
     // implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+    /* JSON */
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5'
+
     /* GSON */
     // implementation 'com.google.code.gson:gson'
 
+}
+
+//querydsl 추가
+def generated = 'src/main/generated'
+sourceSets {
+    main.java.srcDirs += [ generated ]
+}
+
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+}
+
+clean.doLast {
+    file(generated).deleteDir()
 }
