@@ -38,10 +38,11 @@ public class UserApiController {
         return null;
     }
 
-    @ApiOperation(value = "회원 추가/수정", notes = "회원 업데이트")
+    @ApiOperation(value = "회원 추가", notes = "회원 추가")
     @PostMapping("/v1/users")
-    public SingleResult<ResponseUserDto> setUser(@RequestBody RequestUserDto userDto) {
-        return null;
+    public SingleResult<Long> setUser(@RequestBody RequestUserDto.CreateUser user) {
+        Long savedUserId = userService.save(user.toEntity());
+        return responseService.getSingleResult(savedUserId);
     }
 
     @ApiOperation(value = "회원 삭제", notes = "회원 삭제")
