@@ -11,13 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseUserDto {
-    private Long userNo;
-    private String userId;
+    private Long userId;
+    private String userLoginId;
     private String userName;
 
     public ResponseUserDto(User user) {
-        this.userNo = user.getUserNo();
         this.userId = user.getUserId();
+        this.userLoginId = user.getUserLoginId();
         this.userName = user.getUserName();
     }
 }
