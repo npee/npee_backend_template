@@ -11,4 +11,9 @@ public interface UserService {
     ResponseUserDto findUser(Long id);
     Long save(User user);
     void deleteUser(Long id);
+
+    List<ResponseUserDto> findAllUsersV2();
+    ResponseUserDto findUserV2(Long id);
+    Long saveV2(User user);
+    void deleteUserV2(Long id);
 }

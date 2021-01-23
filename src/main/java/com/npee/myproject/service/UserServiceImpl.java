@@ -1,5 +1,6 @@
 package com.npee.myproject.service;
 
+import com.npee.myproject.advice.exception.CustomUserNotExistsException;
 import com.npee.myproject.domain.entity.User;
 import com.npee.myproject.domain.entity.dto.ResponseUserDto;
 import com.npee.myproject.repository.UserJpaRepository;
@@ -39,5 +40,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ResponseUserDto> findAllUsersV2() {
+        return null;
+    }
+
+    @Override
+    public ResponseUserDto findUserV2(Long id) {
+        return null;
+    }
+
+    @Override
+    public Long saveV2(User user) {
+        return userJpaRepository.save(user).getId();
+    }
+
+    @Override
+    public void deleteUserV2(Long id) {
+        userJpaRepository.findById(id).orElseThrow(CustomUserNotExistsException::new);
+        userJpaRepository.deleteById(id);
     }
 }

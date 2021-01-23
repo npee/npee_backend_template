@@ -43,10 +43,17 @@ public class UserApiController {
         return responseService.getSingleResult(savedUserId);
     }
 
-    @ApiOperation(value = "회원 삭제", notes = "회원 삭제")
-    @DeleteMapping("/v1/users/{id}")
-    public CommonResult deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    @ApiOperation(value = "회원 추가 V2", notes = "회원 추가 V2")
+    @PostMapping("/v2/users")
+    public SingleResult<Long> setUserV2(@RequestBody RequestUserDto.CreateUser user) {
+        Long savedUserId = userService.saveV2(user.toEntity());
+        return responseService.getSingleResult(savedUserId);
+    }
+
+    @ApiOperation(value = "회원 삭제 V2", notes = "회원 삭제 V2")
+    @DeleteMapping("/v2/users/{id}")
+    public CommonResult deleteUserV2(@PathVariable Long id) {
+        userService.deleteUserV2(id);
         return responseService.getSuccessResult();
     }
 
