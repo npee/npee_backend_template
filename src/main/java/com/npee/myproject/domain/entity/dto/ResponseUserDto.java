@@ -16,7 +16,7 @@ public class ResponseUserDto {
     private String userName;
 
     public ResponseUserDto(User user) {
-        this.userId = user.getUserId();
+        this.userId = user.getId();
         this.userLoginId = user.getUserLoginId();
         this.userName = user.getUserName();
     }

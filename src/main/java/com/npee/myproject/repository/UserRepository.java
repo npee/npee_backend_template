@@ -23,7 +23,7 @@ public class UserRepository {
 
     @Transactional
     public User save(User user) {
-        if (user.getUserId() == null) {
+        if (user.getId() == null) {
             em.persist(user);
             return user;
         } else {

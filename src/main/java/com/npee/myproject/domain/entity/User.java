@@ -19,7 +19,8 @@ import javax.persistence.*;
 @Slf4j
 public class User extends BaseTime {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @Column(name = "user_id")
+    private Long id;
 
     @Column(nullable = false, length = 20)
     private String userLoginId;
@@ -31,6 +32,6 @@ public class User extends BaseTime {
     private String userName;
 
     public ResponseUserDto toResponseDto() {
-        return new ResponseUserDto(this.userId, this.userLoginId, this.userName);
+        return new ResponseUserDto(this.id, this.userLoginId, this.userName);
     }
 }

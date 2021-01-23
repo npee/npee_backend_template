@@ -28,6 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long save(User user) {
-        return userRepository.save(user).getUserId();
+        return userRepository.save(user).getId();
     }
 }
