@@ -1,5 +1,6 @@
 package com.npee.myproject.api;
 
+import com.npee.myproject.config.response.CommonResult;
 import com.npee.myproject.config.response.ListResult;
 import com.npee.myproject.config.response.ResponseService;
 import com.npee.myproject.config.response.SingleResult;
@@ -45,9 +46,10 @@ public class UserApiController {
     }
 
     @ApiOperation(value = "회원 삭제", notes = "회원 삭제")
-    @DeleteMapping("/v1/users/{userNo}")
-    public SingleResult<ResponseUserDto> deleteUser(@PathVariable Long userNo) {
-        return null;
+    @DeleteMapping("/v1/users/{id}")
+    public CommonResult deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return responseService.getSuccessResult();
     }
 
 }

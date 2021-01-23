@@ -1,5 +1,6 @@
 package com.npee.myproject.repository;
 
+import com.npee.myproject.advice.exception.CustomUserNotExistsException;
 import com.npee.myproject.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -7,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -22,9 +24,7 @@ public class UserRepository {
     }
 
     public User findById(Long id) {
-        return em.createQuery(
-                "select u from User u where u.id = :id", User.class
-        ).setParameter("id", id).getSingleResult();
+        return em.find(User.class, id);
     }
 
     @Transactional
@@ -35,6 +35,15 @@ public class UserRepository {
         } else {
             return em.merge(user);
         }
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        User user = findById(id);
+        if (user == null) {
+            throw new CustomUserNotExistsException();
+        }
+        em.remove(user);
     }
 
 }
