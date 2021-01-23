@@ -26,8 +26,6 @@ public class UserApiController {
 
     @ApiOperation(value = "회원 목록", notes = "회원 목록 불러오기")
     @GetMapping("/v1/all-users")
-    // TODO: Entity가 준비되면 CommonResult에서 상황에 맞게 SingleResult나 ListResult로 변경
-    // TODO: Entity에 직접 접근하지 않기 위해 DTO 이용
     public ListResult<ResponseUserDto> getUsers() {
         return responseService.getListResult(userService.findAllUsers());
     }
