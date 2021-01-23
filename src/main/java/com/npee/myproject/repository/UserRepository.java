@@ -21,6 +21,12 @@ public class UserRepository {
         ).getResultList();
     }
 
+    public User findById(Long id) {
+        return em.createQuery(
+                "select u from User u where u.id = :id", User.class
+        ).setParameter("id", id).getSingleResult();
+    }
+
     @Transactional
     public User save(User user) {
         if (user.getId() == null) {

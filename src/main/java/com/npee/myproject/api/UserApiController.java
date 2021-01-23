@@ -33,9 +33,8 @@ public class UserApiController {
 
     @ApiOperation(value = "회원 검색", notes = "특정 회원 검색")
     @GetMapping("/v1/users")
-    public SingleResult<ResponseUserDto> getUser(@RequestParam String id,
-                                                 @RequestParam String pw) {
-        return null;
+    public SingleResult<ResponseUserDto> getUser(@RequestParam Long id) {
+        return responseService.getSingleResult(userService.findUser(id));
     }
 
     @ApiOperation(value = "회원 추가", notes = "회원 추가")
