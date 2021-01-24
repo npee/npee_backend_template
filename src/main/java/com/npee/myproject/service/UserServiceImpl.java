@@ -44,12 +44,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<ResponseUserDto> findAllUsersV2() {
-        return null;
+        List<User> users = userJpaRepository.findAll();
+        List<ResponseUserDto> result = users.stream()
+                .map(user -> new ResponseUserDto(user)).collect(Collectors.toList());
+        return result;
     }
 
     @Override
     public ResponseUserDto findUserV2(Long id) {
-        return null;
+        User user = userJpaRepository.findById(id)
+                .orElseThrow(CustomUserNotExistsException::new);
+        return user.toResponseDto();
     }
 
     @Override

@@ -43,6 +43,18 @@ public class UserApiController {
         return responseService.getSingleResult(savedUserId);
     }
 
+    @ApiOperation(value = "회원 목록 V2", notes = "회원 목록 불러오기 V2")
+    @GetMapping("/v2/all-users")
+    public ListResult<ResponseUserDto> getUsersV2() {
+        return responseService.getListResult(userService.findAllUsersV2());
+    }
+
+    @ApiOperation(value = "회원 검색 V2", notes = "특정 회원 검색 V2")
+    @GetMapping("/v2/users")
+    public SingleResult<ResponseUserDto> getUserV2(@RequestParam Long id) {
+        return responseService.getSingleResult(userService.findUserV2(id));
+    }
+
     @ApiOperation(value = "회원 추가 V2", notes = "회원 추가 V2")
     @PostMapping("/v2/users")
     public SingleResult<Long> setUserV2(@RequestBody RequestUserDto.CreateUser user) {
